@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | PeopleFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-page" data-page="dashboard">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">P</span><span>PeopleFlow</span></a>
+      <p class="workspace-label">WORKSPACE</p>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="{{ url_for('dashboard') }}"><span>▦</span>Overview</a>
+        <a class="nav-link" href="{{ url_for('employees') }}"><span>♙</span>Employees</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">?</span><div><strong>Need help?</strong><small>Visit the help centre</small></div></div>
+        <button class="profile-row" id="logoutButton" type="button" title="Sign out"><span class="avatar">{{ user_name[:1]|upper }}</span><span><strong>{{ user_name }}</strong><small>Administrator</small></span><span class="logout-icon">↗</span></button>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation">☰</button>
+        <div><p class="breadcrumb">WORKSPACE / OVERVIEW</p><h1>Good morning, {{ user_name.split(' ')[0] }} <span aria-hidden="true">👋</span></h1></div>
+        <div class="top-actions"><span class="today-label" id="todayLabel"></span><a class="button button-primary" href="{{ url_for('employees') }}">+ Add employee</a></div>
+      </header>
+      <section class="content-area">
+        <div class="section-heading"><div><h2>Team overview</h2><p class="muted">Here’s what’s happening across your organisation.</p></div></div>
+        <div class="stats-grid" id="statsGrid" aria-live="polite">
+          <article class="stat-card stat-blue"><div><span>Total employees</span><strong id="totalCount">—</strong><small>People in your workspace</small></div><span class="stat-icon">♙</span></article>
+          <article class="stat-card stat-green"><div><span>Active now</span><strong id="activeCount">—</strong><small>Currently working</small></div><span class="stat-icon">✓</span></article>
+          <article class="stat-card stat-orange"><div><span>On leave</span><strong id="leaveCount">—</strong><small>Temporarily away</small></div><span class="stat-icon">◷</span></article>
+          <article class="stat-card stat-purple"><div><span>Departments</span><strong id="departmentCount">—</strong><small>Across your organisation</small></div><span class="stat-icon">▤</span></article>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel recent-panel"><div class="panel-header"><div><h3>Recently added</h3><p class="muted">Your latest team members</p></div><a href="{{ url_for('employees') }}" class="text-link">View all →</a></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>STATUS</th><th>JOINED</th></tr></thead><tbody id="recentEmployees"><tr><td colspan="4" class="empty-cell">Loading your team…</td></tr></tbody></table></div></section>
+          <section class="panel department-panel"><div class="panel-header"><div><h3>Department split</h3><p class="muted">Team distribution</p></div></div><div class="department-list" id="departmentList"><p class="empty-state">Loading departments…</p></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast-region" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

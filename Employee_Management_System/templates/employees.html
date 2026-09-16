@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employees | PeopleFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-page" data-page="employees">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">P</span><span>PeopleFlow</span></a>
+      <p class="workspace-label">WORKSPACE</p>
+      <nav class="side-nav" aria-label="Main navigation"><a class="nav-link" href="{{ url_for('dashboard') }}"><span>▦</span>Overview</a><a class="nav-link active" href="{{ url_for('employees') }}"><span>♙</span>Employees</a></nav>
+      <div class="sidebar-bottom"><div class="help-card"><span class="help-icon">?</span><div><strong>Need help?</strong><small>Visit the help centre</small></div></div><button class="profile-row" id="logoutButton" type="button" title="Sign out"><span class="avatar">{{ user_name[:1]|upper }}</span><span><strong>{{ user_name }}</strong><small>Administrator</small></span><span class="logout-icon">↗</span></button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation">☰</button>
+        <div><p class="breadcrumb">WORKSPACE / PEOPLE</p><h1>Employees</h1></div>
+        <div class="top-actions"><button class="button button-secondary export-button" id="exportButton" type="button">⇩ Export</button><button class="button button-primary" id="addEmployeeButton" type="button">+ Add employee</button></div>
+      </header>
+      <section class="content-area">
+        <div class="section-heading employee-heading"><div><h2>Manage your team</h2><p class="muted">Add, update, and organise everyone in your organisation.</p></div><span class="count-badge" id="employeeCount">0 employees</span></div>
+        <section class="panel employee-panel">
+          <div class="filter-bar">
+            <label class="search-control"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search by name, email, or role"></label>
+            <select id="departmentFilter" aria-label="Filter by department"><option value="">All departments</option></select>
+            <select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option>Active</option><option>On Leave</option><option>Inactive</option></select>
+          </div>
+          <div class="table-wrap"><table class="employees-table"><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>ROLE</th><th>STATUS</th><th>JOINED</th><th aria-label="Actions"></th></tr></thead><tbody id="employeesTable"><tr><td colspan="6" class="empty-cell">Loading your employees…</td></tr></tbody></table></div>
+          <div class="table-footer"><span id="tableSummary">Loading…</span><span>Showing live results</span></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="employeeModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header"><div><p class="eyebrow accent" id="modalEyebrow">NEW TEAM MEMBER</p><h2 id="modalTitle">Add employee</h2></div><button class="icon-button" type="button" data-close-modal aria-label="Close">×</button></div>
+      <form id="employeeForm" novalidate>
+        <input type="hidden" name="id" id="employeeDbId">
+        <div class="form-grid">
+          <label>Employee ID<input name="employee_id" placeholder="EMP-001" required><small class="field-error"></small></label>
+          <label>Full name<input name="full_name" autocomplete="name" placeholder="Aarav Sharma" required><small class="field-error"></small></label>
+          <label>Email<input name="email" type="email" autocomplete="email" placeholder="aarav@company.com" required><small class="field-error"></small></label>
+          <label>Phone <span class="optional">Optional</span><input name="phone" type="tel" placeholder="+91 98765 43210"><small class="field-error"></small></label>
+          <label>Department<input name="department" placeholder="Engineering" required><small class="field-error"></small></label>
+          <label>Position<input name="position" placeholder="Backend Developer" required><small class="field-error"></small></label>
+          <label>Status<select name="employment_status"><option>Active</option><option>On Leave</option><option>Inactive</option></select><small class="field-error"></small></label>
+          <label>Monthly salary<input name="salary" type="number" min="0" step="0.01" placeholder="60000" required><small class="field-error"></small></label>
+          <label>Joining date<input name="joining_date" type="date" required><small class="field-error"></small></label>
+        </div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-modal>Cancel</button><button class="button button-primary" id="saveEmployeeButton" type="submit">Save employee</button></div>
+      </form>
+    </section>
+  </div>
+  <div class="toast-region" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

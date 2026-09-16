@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to the Employee Management System">
+  <title>Welcome | PeopleFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-page" data-page="auth">
+  <main class="auth-shell">
+    <section class="auth-intro">
+      <a class="brand brand-light" href="{{ url_for('login') }}" aria-label="PeopleFlow home">
+        <span class="brand-mark">P</span><span>PeopleFlow</span>
+      </a>
+      <div class="intro-copy">
+        <p class="eyebrow">PEOPLE, SIMPLIFIED</p>
+        <h1>Everything your team needs, in one calm place.</h1>
+        <p>Manage your workforce, see the whole picture, and spend more time on the work that matters.</p>
+      </div>
+      <div class="team-pulse" aria-hidden="true">
+        <div class="pulse-heading"><span class="pulse-dot"></span><span>Team activity</span><b>Live</b></div>
+        <div class="pulse-main"><div class="avatar-stack"><i>AK</i><i>SM</i><i>RP</i><i>+8</i></div><strong>12 people online</strong></div>
+        <div class="pulse-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="intro-orb orb-one"></div><div class="intro-orb orb-two"></div>
+      <p class="intro-note">Built for growing teams</p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <a class="brand brand-mobile" href="{{ url_for('login') }}"><span class="brand-mark">P</span><span>PeopleFlow</span></a>
+        <div id="loginView">
+          <p class="eyebrow accent">WELCOME BACK</p>
+          <h2>Sign in to your account</h2>
+          <p class="muted">Enter your details to access your workspace.</p>
+          <form id="loginForm" class="stack-form" novalidate>
+            <label>Email address
+              <input name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+              <small class="field-error"></small>
+            </label>
+            <label>Password
+              <div class="password-wrap"><input name="password" type="password" autocomplete="current-password" placeholder="••••••••" required><button class="toggle-password" type="button" aria-label="Show password">Show</button></div>
+              <small class="field-error"></small>
+            </label>
+            <button class="button button-primary button-wide" type="submit"><span>Sign in</span><span aria-hidden="true">→</span></button>
+          </form>
+          <p class="auth-switch">New to PeopleFlow? <button type="button" class="text-button" data-auth-mode="signup">Create an account</button></p>
+        </div>
+
+        <div id="signupView" hidden>
+          <button type="button" class="back-button" data-auth-mode="login">← Back to sign in</button>
+          <p class="eyebrow accent">GET STARTED</p>
+          <h2>Create your account</h2>
+          <p class="muted">Set up your workspace in less than a minute.</p>
+          <form id="signupForm" class="stack-form" novalidate>
+            <label>Full name
+              <input name="full_name" type="text" autocomplete="name" placeholder="Aarav Sharma" required>
+              <small class="field-error"></small>
+            </label>
+            <label>Work email
+              <input name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+              <small class="field-error"></small>
+            </label>
+            <label>Password
+              <div class="password-wrap"><input name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required><button class="toggle-password" type="button" aria-label="Show password">Show</button></div>
+              <small class="field-error"></small>
+            </label>
+            <button class="button button-primary button-wide" type="submit"><span>Create account</span><span aria-hidden="true">→</span></button>
+          </form>
+          <p class="auth-switch">Already registered? <button type="button" class="text-button" data-auth-mode="login">Sign in</button></p>
+        </div>
+      </div>
+      <p class="auth-footer">© 2026 PeopleFlow. A better way to manage people.</p>
+    </section>
+  </main>
+  <div class="toast-region" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
